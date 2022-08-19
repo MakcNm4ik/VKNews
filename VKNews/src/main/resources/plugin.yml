@@ -1,0 +1,11 @@
+name: VKNews
+version: '${project.version}'
+main: ru.makcnm4ik.vk_news.VKNews
+api-version: 1.13
+prefix: VK News
+authors: [ MakcNm4ik ]
+description: Plugin for show news from VK in Minecraft
+
+commands:
+  news:
+    description: View latest VK news from this server

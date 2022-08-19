@@ -1,0 +1,14 @@
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/util/PageUtil.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/config/ConfigYML.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/vk/VKWallEntity.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/vk/VKWallParser.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/VKNews.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/vk/VKResponseResult.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/command/NewsCommand.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/data/NewsData.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/util/EventUtil.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/util/DataUtil.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/util/TextUtil.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/listener/PlayerJoinListener.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/util/NewsUtil.java
+/home/max/IdeaProjects/VKNews/src/main/java/ru/makcnm4ik/vk_news/event/PreShowBookEvent.java
