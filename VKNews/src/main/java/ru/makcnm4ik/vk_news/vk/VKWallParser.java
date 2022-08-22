@@ -52,7 +52,7 @@ public class VKWallParser {
                     ? new VKResponseResult(vkWallEntity, 0)
                     : new VKResponseResult(vkWallEntity, 1);
         } catch (IOException e) {
-            VKNews.getInstance().printWarn(e, "Parsing VK error");
+            VKNews.getInstance().printWarn(e, "getLastPost error");
             return null;
         }
     }

@@ -7,8 +7,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import ru.makcnm4ik.vk_news.command.NewsCommand;
 import ru.makcnm4ik.vk_news.config.ConfigYML;
 import ru.makcnm4ik.vk_news.data.NewsData;
-import ru.makcnm4ik.vk_news.util.DataUtil;
 import ru.makcnm4ik.vk_news.listener.PlayerJoinListener;
+import ru.makcnm4ik.vk_news.util.DataUtil;
+import ru.makcnm4ik.vk_news.util.PageUtil;
 import ru.makcnm4ik.vk_news.vk.VKResponseResult;
 import ru.makcnm4ik.vk_news.vk.VKWallParser;
 
@@ -18,7 +19,6 @@ public final class VKNews extends JavaPlugin {
     private final Logger logger = getLogger();
     private final PluginManager pluginManager = Bukkit.getPluginManager();
     private static VKNews instance;
-    private static boolean isFirstCheck = true;
 
     public static VKNews getInstance() {
         return instance;
@@ -27,9 +27,9 @@ public final class VKNews extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
-        DataUtil.updateData(this);
         ConfigYML configYML = new ConfigYML(this);
+
+        DataUtil.updateData();
 
         if (configYML.getVkAccessToken().length() == 0 || configYML.getVkDomain().length() == 0) {
             disablePlugin(null, "Configs have been created and need tweaking. Plugin disable");
@@ -44,14 +44,20 @@ public final class VKNews extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimerAsynchronously(
                 this,
                 () -> {
+                    VKResponseResult lastRRes = NewsData.lastResponseResult;
                     VKResponseResult newVkResponseResult = vkWallParser.getLastPost();
 
-                    if (newVkResponseResult == null) NewsData.lastResponseResult = null;
-                    else if (NewsData.lastResponseResult.getId() != newVkResponseResult.getId()) {
-                        if (!isFirstCheck) NewsData.seenPlayers.clear();
-                        isFirstCheck = false;
+                    if (newVkResponseResult == null) printWarn(null, "newVkResponseResult = null");
+                    else if (lastRRes == null) NewsData.lastResponseResult = null;
+                    else if (lastRRes.getId() != newVkResponseResult.getId()) {
+                        NewsData.seenPlayers.clear();
                         newVkResponseResult.setText(EmojiParser.removeAllEmojis(newVkResponseResult.getText()));
                         NewsData.lastResponseResult = newVkResponseResult;
+                    } else if (lastRRes.getId() == newVkResponseResult.getId() && lastRRes.getText().equals("Automatically created")) {
+                        NewsData.lastResponseResult.setPages(PageUtil.generateNewsPages(
+                                newVkResponseResult.getText(),
+                                newVkResponseResult.getWallUrl()
+                        ));
                     }
                 },
                 0, 20L * configYML.getUpdateCoolDown()
@@ -63,7 +69,7 @@ public final class VKNews extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        DataUtil.saveData(this);
+        DataUtil.saveData();
     }
 
     public void disablePlugin(Exception reason, String message) {

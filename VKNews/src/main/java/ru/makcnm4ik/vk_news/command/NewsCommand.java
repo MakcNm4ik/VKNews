@@ -14,7 +14,7 @@ public class NewsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (NewsData.lastResponseResult.getId() == -1 || NewsData.lastResponseResult == null) {
             sender.sendMessage(ChatColor.RED + "Новость отсутствует или произошла ошибка");
-            VKNews.getInstance().printWarn(null, "OnCommand -> " + NewsData.lastResponseResult.toString());
+            VKNews.getInstance().printWarn(null, "onCommand error " + NewsData.lastResponseResult.toString());
             return false;
         }
 
