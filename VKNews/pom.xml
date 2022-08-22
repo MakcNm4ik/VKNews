@@ -6,7 +6,7 @@
 
     <groupId>ru.makcnm4ik</groupId>
     <artifactId>vk-news</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>VK News</name>
