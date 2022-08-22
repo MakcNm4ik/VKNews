@@ -39,13 +39,7 @@ public class HibernateDB {
 
         try {
             session.save(new LastPostId(NewsData.lastResponseResult.getId()));
-
-            System.out.println(NewsData.lastResponseResult.getId());
-
             for (String uuid : NewsData.seenPlayers) session.save(new SeenPlayer(uuid));
-
-            NewsData.seenPlayers.forEach(g -> System.out.println(g));
-
             transaction.commit();
         } catch (Exception e) {
             VKNews.getInstance().printWarn(e, "clearTable error");
@@ -78,7 +72,6 @@ public class HibernateDB {
             Query query = session.createQuery("FROM SeenPlayer");
             List<SeenPlayer> queryResult = (List<SeenPlayer>) query.getResultList();
             queryResult.forEach(seenPlayer -> resultList.add(seenPlayer.getUuid()));
-            resultList.forEach(System.out::println);
         } catch (NoResultException ignore) {}
         catch (Exception e) {
             VKNews.getInstance().printWarn(e, "getSeenPlayerUuidList error");
@@ -96,7 +89,6 @@ public class HibernateDB {
         try {
             Query query = session.createQuery("FROM LastPostId");
             result = ((LastPostId) query.getSingleResult()).getLastPostId();
-            System.out.println(result);
         } catch (NoResultException ignore) {}
         catch (Exception e) {
             VKNews.getInstance().printWarn(e, "getLastPostId error");
